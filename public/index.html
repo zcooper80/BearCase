@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>BearCase — AI-Era Short Portfolio Analyzer</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="logo-mark">B</span>
+      <span>BearCase</span>
+      <span class="nav-pill">EDUCATIONAL · NOT ADVICE</span>
+    </div>
+    <div class="nav-actions">
+      <span class="live-indicator" id="liveStatus">
+        <span class="live-dot" id="liveDot"></span><span id="liveText">Connecting…</span>
+      </span>
+      <button class="refresh-btn" id="refreshBtn" title="Refresh live data">⟳</button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">◐</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Short the hype.<br/>Size the risk.</h1>
+  <p class="lede">
+    Live fundamental, technical, and SEC-filing signals — combined with an AI-disruption
+    thesis — translated into a capital-sized short portfolio with defined risk.
+  </p>
+</section>
+
+<div class="container">
+  <div class="grid grid-split">
+
+    <aside class="card controls">
+      <div class="card-title">Portfolio Parameters</div>
+
+      <div class="field">
+        <label for="pool">Starting Capital</label>
+        <select id="pool">
+          <option value="500">$500</option>
+          <option value="1000" selected>$1,000</option>
+          <option value="2000">$2,000</option>
+          <option value="5000">$5,000</option>
+          <option value="10000">$10,000</option>
+          <option value="25000">$25,000</option>
+          <option value="50000">$50,000</option>
+          <option value="100000">$100,000</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="horizon">Investment Horizon</label>
+        <select id="horizon">
+          <option value="short">Short-term · 1–3 mo · technicals</option>
+          <option value="medium" selected>Medium-term · 3–12 mo · balanced</option>
+          <option value="long">Long-term · 12–24 mo · fundamentals</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Risk Multiplier <span style="float:right;color:var(--text);font-weight:600;" id="multVal">2×</span></label>
+        <input id="multiplier" type="range" min="1" max="5" step="1" value="2" />
+        <div class="slider-row"><span>Cash</span><span>Options</span><span>Deep-OTM</span></div>
+      </div>
+
+      <div class="field">
+        <label>Risk Profile</label>
+        <div class="segmented" id="riskSeg">
+          <button data-risk="conservative">Conservative</button>
+          <button class="active" data-risk="balanced">Balanced</button>
+          <button data-risk="aggressive">Aggressive</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>AI Disruption Weight <span style="float:right;color:var(--text);font-weight:600;" id="aiWeightVal">40%</span></label>
+        <input id="aiWeight" type="range" min="0" max="70" step="5" value="40" />
+        <small>How heavily to weight AI-automation vulnerability in ranking.</small>
+      </div>
+
+      <button id="runAnalysis" class="btn-primary">Build Short Portfolio</button>
+    </aside>
+
+    <main>
+      <div id="summary" class="metrics"></div>
+      <div id="portfolio"></div>
+      <div id="breakdown"></div>
+      <div id="risk-plan"></div>
+      <div id="universe"></div>
+    </main>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>
+    <strong>Disclaimer:</strong> BearCase is an educational analytical framework.
+    Live data is sourced from Yahoo Finance public endpoints and SEC EDGAR;
+    neither is guaranteed, realtime, or official. Shorting has unbounded theoretical
+    downside and is unsuitable for most investors. Nothing here is an offer,
+    solicitation, or recommendation to buy, sell, or short any security. Consult a
+    licensed advisor before trading.
+  </p>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/scoring.js"></script>
+<script src="js/portfolio.js"></script>
+<script src="js/live.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
