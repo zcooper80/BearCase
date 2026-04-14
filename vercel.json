@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "functions": {
+    "api/universe.js":        { "maxDuration": 30 },
+    "api/enrich/[ticker].js": { "maxDuration": 30 },
+    "api/history/[ticker].js":{ "maxDuration": 20 },
+    "api/summary/[ticker].js":{ "maxDuration": 15 },
+    "api/quote/[ticker].js":  { "maxDuration": 10 },
+    "api/filings/[ticker].js":{ "maxDuration": 15 }
+  }
+}

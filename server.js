@@ -108,9 +108,11 @@ app.get("/api/universe", async (_req, res) => {
   const data = results.map((r, i) => r.status === "fulfilled"
     ? r.value
     : { ...BASE[i], _meta: { error: String(r.reason), live: false } });
+  const liveCount = data.filter(d => d._live?.price != null).length;
   res.json({
     fetchedAt: new Date().toISOString(),
     count: data.length,
+    liveCount,
     candidates: data
   });
 });

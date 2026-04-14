@@ -46,15 +46,21 @@ async function refreshAndRun() {
   setLiveIndicator("loading", "Fetching…");
   await refreshCandidates();
   const anyLive = window.CANDIDATES.some(c => c._live && c._live.price != null);
+  const liveCount = window.LIVE_COUNT || 0;
   if (window.LIVE_MODE && anyLive) {
     const when = window.LIVE_FETCHED_AT
       ? new Date(window.LIVE_FETCHED_AT).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})
       : "now";
-    setLiveIndicator("live", `Live · ${when}`);
+    setLiveIndicator("live", `Live · ${liveCount}/${window.CANDIDATES.length} · ${when}`);
   } else if (window.LIVE_MODE) {
-    setLiveIndicator("stale", "API unreachable · baseline");
+    // Backend reachable but upstream (Yahoo/SEC) gave nothing live.
+    // Pull meta from one candidate to surface the real error.
+    const sample = window.CANDIDATES.find(c => c._meta?.errors?.length);
+    const why = sample?._meta?.errors?.[0]?.err || "upstream providers blocked";
+    setLiveIndicator("stale", "Live provider blocked · baseline", `Upstream: ${why}`);
   } else {
-    setLiveIndicator("stale", "Offline · baseline");
+    const why = window.__BEARCASE_FETCH_ERR || "backend unreachable";
+    setLiveIndicator("stale", "API unreachable · baseline", why);
   }
   run();
 }

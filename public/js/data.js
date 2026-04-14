@@ -308,5 +308,6 @@ const CANDIDATES = [
   }
 ];
 
-// Expose
+// Expose — dual-purpose: browser (window) + Node (CommonJS for Vercel functions)
 if (typeof window !== "undefined") window.CANDIDATES = CANDIDATES;
+if (typeof module !== "undefined" && module.exports) module.exports = { CANDIDATES };
